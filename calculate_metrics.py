@@ -82,7 +82,7 @@ def main():
             {
                 "run_id": os.path.basename(nav_file),
                 "status": nav.get("status", "unknown"),
-                "is_success": (nav.get("status") == "success"),
+                "is_success": ("success" in nav.get("status")),
                 "time_s": nav.get("total_time_s", 0),
                 "path_efficiency": nav.get("path_efficiency", None),
                 "freq_hz_avg": statistics.mean(run_freqs) if run_freqs else 0,
@@ -116,7 +116,8 @@ def main():
 
     print("\n" + "=" * 75)
     print(
-        f" FINAL EXPERIMENT METRICS (Success Rate: {global_stats['summary']['success_rate']}%)"
+        f" FINAL EXPERIMENT METRICS (Success Rate: {global_stats['summary']['success_rate']}% "
+        + f"- {global_stats['summary']['success_runs']}/{global_stats['summary']['total_runs']})"
     )
     print("=" * 75)
 
